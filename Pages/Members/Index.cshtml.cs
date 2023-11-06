@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Bruj_Tudor_Lab3.Data;
 using Bruj_Tudor_Lab3.Models;
 
-namespace Bruj_Tudor_Lab3.Pages
+namespace Bruj_Tudor_Lab3.Pages.Members
 {
     public class IndexModel : PageModel
     {

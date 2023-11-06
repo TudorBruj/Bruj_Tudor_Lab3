@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Bruj_Tudor_Lab3.Data;
 using Bruj_Tudor_Lab3.Models;
 
-namespace Bruj_Tudor_Lab3.Pages
+namespace Bruj_Tudor_Lab3.Pages.Borrowings
 {
     public class IndexModel : PageModel
     {
@@ -19,13 +19,16 @@ namespace Bruj_Tudor_Lab3.Pages
             _context = context;
         }
 
-        public IList<Member> Member { get;set; } = default!;
+        public IList<Borrowing> Borrowing { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Member != null)
+            if (_context.Borrowing != null)
             {
-                Member = await _context.Member.ToListAsync();
+                Borrowing = await _context.Borrowing
+                .Include(b => b.Book)
+                .ThenInclude(b => b.Author)
+                .Include(b => b.Member).ToListAsync();
             }
         }
     }
