@@ -14,6 +14,9 @@ namespace Bruj_Tudor_Lab3.Pages.Members
     {
         private readonly Bruj_Tudor_Lab3.Data.Bruj_Tudor_Lab3Context _context;
 
+        [BindProperty]
+        public Member Members { get; set; }
+
         public CreateModel(Bruj_Tudor_Lab3.Data.Bruj_Tudor_Lab3Context context)
         {
             _context = context;
