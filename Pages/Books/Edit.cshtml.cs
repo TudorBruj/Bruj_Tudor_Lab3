@@ -31,6 +31,7 @@ namespace Bruj_Tudor_Lab3.Pages.Books
             }
             Book = await _context.Book
  .Include(b => b.Publisher)
+ .Include(b => b.Author)
  .Include(b => b.BookCategories).ThenInclude(b => b.Category)
  .AsNoTracking()
  .FirstOrDefaultAsync(m => m.ID == id);
@@ -60,6 +61,7 @@ selectedCategories)
             //se va include Author conform cu sarcina de la lab 2
             var bookToUpdate = await _context.Book
             .Include(i => i.Publisher)
+            .Include(i => i.Author)
             .Include(i => i.BookCategories)
             .ThenInclude(i => i.Category)
             .FirstOrDefaultAsync(s => s.ID == id);

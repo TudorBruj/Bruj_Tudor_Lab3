@@ -18,6 +18,8 @@ namespace Bruj_Tudor_Lab3.Models
         public Publisher? Publisher { get; set; }
         public int? AuthorID { get; set; }
         public Author? Author { get; set; }
+        public int? BorrowingID { get; set; }
+        public Borrowing? Borrowing { get; set; }
         public ICollection<BookCategory>? BookCategories { get; set; }
     }
 }
