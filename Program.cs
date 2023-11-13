@@ -4,8 +4,20 @@ using Bruj_Tudor_Lab3.Data;
 using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+   policy.RequireRole("Admin"));
+});
+
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Books");
+    options.Conventions.AllowAnonymousToPage("/Books/Index");
+    options.Conventions.AllowAnonymousToPage("/Books/Details");
+    options.Conventions.AuthorizeFolder("/Members", "AdminPolicy");
+});
 builder.Services.AddDbContext<Bruj_Tudor_Lab3Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Bruj_Tudor_Lab3Context") ?? throw new InvalidOperationException("Connection string 'Bruj_Tudor_Lab3Context' not found.")));
 
@@ -14,6 +26,7 @@ builder.Services.AddDbContext<LibraryIdentityContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("Bruj_Tudor_Lab3Context") ?? throw new InvalidOperationException("Connectionstring 'Nume_Pren_Lab2Context' not found.")));
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 options.SignIn.RequireConfirmedAccount = true)
+ .AddRoles<IdentityRole>()
  .AddEntityFrameworkStores<LibraryIdentityContext>();
 
 var app = builder.Build();

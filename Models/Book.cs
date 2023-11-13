@@ -8,8 +8,9 @@ namespace Bruj_Tudor_Lab3.Models
         public int ID { get; set; }
         [Display(Name = "Book Title")]
         public string Title { get; set; }
-       
+
         [Column(TypeName = "decimal(6, 2)")]
+        [Range(0.01, 500)]
         public decimal Price { get; set; }
 
         [DataType(DataType.Date)]
