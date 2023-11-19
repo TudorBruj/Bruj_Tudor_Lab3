@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Bruj_Tudor_Lab3.Data;
 using Bruj_Tudor_Lab3.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bruj_Tudor_Lab3.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : BookCategoriesPageModel
     {
         private readonly Bruj_Tudor_Lab3.Data.Bruj_Tudor_Lab3Context _context;
@@ -23,7 +25,7 @@ namespace Bruj_Tudor_Lab3.Pages.Books
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
 "PublisherName");
             ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
-"FullName");
+"FirstName");
 
             var book = new Book();
             book.BookCategories = new List<BookCategory>();
